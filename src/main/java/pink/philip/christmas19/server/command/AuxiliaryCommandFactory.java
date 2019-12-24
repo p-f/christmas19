@@ -47,6 +47,8 @@ public class AuxiliaryCommandFactory implements CommandFactory {
                 return new PrintAndExit("egg", null, "Geil");
             default:
         }
+        LOGGER.info("Unrecognized command " + command + " for user " +
+                channel.getSession().getUsername());
         return new PrintAndExit("unrecognized", null,
                 getError("Unrecognized command."));
     }

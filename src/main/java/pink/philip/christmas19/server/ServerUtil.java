@@ -38,9 +38,8 @@ public class ServerUtil {
         server.setPasswordAuthenticator(new NoPasswordAuthenticator());
         server.setShellFactory(new ChristmasShellFactory());
         server.setCommandFactory(new AuxiliaryCommandFactory());
-        final SimpleGeneratorHostKeyProvider keyPairProvider = new SimpleGeneratorHostKeyProvider(
-                config.getHostKeyPath());
-        server.setKeyPairProvider(keyPairProvider);
+        server.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(
+                config.getHostKeyPath()));
         return server;
     }
 }

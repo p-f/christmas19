@@ -18,6 +18,7 @@ package pink.philip.christmas19.server;
 import org.apache.sshd.server.SshServer;
 import org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider;
 import pink.philip.christmas19.server.auth.NoPasswordAuthenticator;
+import pink.philip.christmas19.server.command.AuxiliaryCommandFactory;
 import pink.philip.christmas19.server.shell.ChristmasShellFactory;
 
 /**
@@ -36,8 +37,10 @@ public class ServerUtil {
         server.setPort(config.getPort());
         server.setPasswordAuthenticator(new NoPasswordAuthenticator());
         server.setShellFactory(new ChristmasShellFactory());
-        server.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(
-                config.getHostKeyPath()));
+        server.setCommandFactory(new AuxiliaryCommandFactory());
+        final SimpleGeneratorHostKeyProvider keyPairProvider = new SimpleGeneratorHostKeyProvider(
+                config.getHostKeyPath());
+        server.setKeyPairProvider(keyPairProvider);
         return server;
     }
 }

@@ -18,7 +18,7 @@
     </developers>
 
     <properties>
-        <mainClass>pink.philip.christmas19.Main</mainClass>
+        <mainClass>pink.philip.christmas19.ChristmasServer</mainClass>
         <encoding>UTF-8</encoding>
     </properties>
 

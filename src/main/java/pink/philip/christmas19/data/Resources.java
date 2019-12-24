@@ -67,7 +67,7 @@ public class Resources {
      */
     public String getMessage() {
         //return properties.getProperty("christmas19.message", "DEFAULT");
-        return "Test Nachricht";
+        return "Frohe Weihnachten!";
     }
 
     /**
@@ -76,7 +76,7 @@ public class Resources {
      * @return The space in percent ({@code [0, 100]}).
      */
     public byte getScreenFillPercent() {
-        return 5;
+        return 6;
     }
 
     /**

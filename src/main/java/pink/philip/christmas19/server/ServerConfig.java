@@ -17,6 +17,7 @@ package pink.philip.christmas19.server;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * A configuration for server instances.
@@ -38,6 +39,11 @@ public class ServerConfig {
      */
     private Path hostKeyPath = Paths.get(System.getProperty("user.dir"),
             "christmasHostKey");
+
+    /**
+     * The password for the authenticator.
+     */
+    private String password = "";
 
     /**
      * Server port.
@@ -70,5 +76,23 @@ public class ServerConfig {
 
     public void setHostKeyPath(Path hostKeyPath) {
         this.hostKeyPath = hostKeyPath;
+    }
+
+    /**
+     * Get the password used to authenticate.
+     *
+     * @return The password.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set the password used to authenticate.
+     *
+     * @param password The new password.
+     */
+    public void setPassword(String password) {
+        this.password = Objects.requireNonNull(password);
     }
 }

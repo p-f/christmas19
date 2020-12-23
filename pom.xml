@@ -6,7 +6,9 @@
 
     <groupId>pink.philip</groupId>
     <artifactId>christmas19</artifactId>
-    <version>2019.1.1-SNAPSHOT</version>
+    <version>2019.2.0-SNAPSHOT</version>
+
+    <name>ChristmasServer</name>
 
     <inceptionYear>2019</inceptionYear>
 
@@ -20,6 +22,7 @@
     <properties>
         <mainClass>pink.philip.christmas19.ChristmasServer</mainClass>
         <encoding>UTF-8</encoding>
+        <buildNr>${maven.build.timestamp}</buildNr>
     </properties>
 
     <build>
@@ -75,6 +78,13 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <!-- Version info file. -->
+                <directory>src/main/resources/version</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>

@@ -69,6 +69,11 @@ public class SnowEngine {
     private short flakesPerRowDiff = 0;
 
     /**
+     * The available cells, per column.
+     */
+    private int[] availableSpace;
+
+    /**
      * Create a new instance of this engine.
      *
      * @param targetSize The target terminal size.
@@ -108,6 +113,8 @@ public class SnowEngine {
                 resources.getScreenFillPercent() / 100;
         flakesPerRow = (short) (cells / size.getColumns());
         flakesPerRowDiff = (short) Math.sqrt(resources.getScreenFillPercent());
+        availableSpace = new int[size.getColumns()];
+        Arrays.fill(availableSpace, size.getRows());
     }
 
     /**
@@ -138,8 +145,12 @@ public class SnowEngine {
             final SnowFlake flake = it.next();
             if (flake.getDelay() <= 0) {
                 final short newRow = (short) (flake.getPosRow() + 1);
-                if (newRow >= size.getRows()) {
+                final short col = flake.getPosCol();
+                if (newRow > availableSpace[col]) {
                     it.remove();
+                    if (availableSpace[col] > 0) {
+                        availableSpace[col]--;
+                    }
                     continue;
                 }
                 flake.setPosRow(newRow);
@@ -172,5 +183,22 @@ public class SnowEngine {
         for (short i = 0; i < newFlakesCount; i++) {
             flakes.add(makeFlake());
         }
+    }
+
+    /**
+     * Get the number of flakes fallen to the ground, per column.
+     */
+    public int getFallenFlakesPerCol(int column) {
+        final int rows = size.getRows();
+        return rows - availableSpace[column];
+    }
+
+    /**
+     * Get the size.
+     *
+     * @return The size.
+     */
+    public Size getSize() {
+        return size;
     }
 }

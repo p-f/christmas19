@@ -22,15 +22,38 @@ import org.apache.sshd.server.session.ServerSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
 /**
- * A password authenticator accepting only empty passwords.
+ * A password authenticator accepting only one specific passwords.
  */
-public class NoPasswordAuthenticator implements PasswordAuthenticator {
+public class FixedPasswortAuthenticator implements PasswordAuthenticator {
 
     /**
      * Logger for this class.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NoPasswordAuthenticator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FixedPasswortAuthenticator.class);
+
+    /**
+     * The expected password.
+     */
+    private final String expectedPassword;
+
+    /**
+     * Create a new instance of this authenticator using an empty password.
+     */
+    public FixedPasswortAuthenticator() {
+        this("");
+    }
+
+    /**
+     * Create a new instance of this authenticator using a specific password.
+     *
+     * @param expectedPassword The expected password.
+     */
+    public FixedPasswortAuthenticator(String expectedPassword) {
+        this.expectedPassword = Objects.requireNonNull(expectedPassword);
+    }
 
     @Override
     public boolean authenticate(String username, String password,
@@ -38,6 +61,6 @@ public class NoPasswordAuthenticator implements PasswordAuthenticator {
         LOGGER.info("Auth from {} as {}({}), Pass={} ({})",
                 serverSession.getClientAddress(),
                 username, username.length(), password, password.length());
-        return password.isEmpty();
+        return expectedPassword.equals(password);
     }
 }

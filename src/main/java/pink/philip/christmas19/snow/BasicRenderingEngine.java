@@ -47,6 +47,15 @@ public class BasicRenderingEngine extends SnowRenderingEngine {
                     flake.getPosCol());
             writer.append("*");
         }
+        final int rows = source.getSize().getRows();
+        for (int col = 0; col < source.getSize().getColumns(); col++) {
+            final int fallenFlakes = source.getFallenFlakesPerCol(col);
+            for (int row = 0; row < fallenFlakes; row++) {
+                output.puts(Capability.cursor_address, rows - row,
+                        col);
+                writer.append("*");
+            }
+        }
         output.flush();
     }
 }

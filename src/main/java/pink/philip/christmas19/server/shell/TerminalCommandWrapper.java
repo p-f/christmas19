@@ -84,7 +84,7 @@ public class TerminalCommandWrapper extends AbstractCommandSupport
                     .encoding(StandardCharsets.UTF_8)
                     .system(false)
                     .jna(false)
-                    .paused(true)
+                    //.paused(true)
                     .size(getSize())
                     .type(getTerminalType())
                     .streams(getInputStream(), getOutputStream())

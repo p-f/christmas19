@@ -88,7 +88,8 @@ public class TerminalOutputTask implements Runnable {
             }
             if (changed) {
                 init();
-                snow = new SnowEngine(getSize());
+                size = getSize();
+                snow = new SnowEngine(size);
                 render = new BasicRenderingEngine(snow, terminal);
                 changed = false;
             }
